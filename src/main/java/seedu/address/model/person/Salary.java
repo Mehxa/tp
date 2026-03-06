@@ -12,14 +12,14 @@ public class Salary {
     public static final String MESSAGE_CONSTRAINTS =
             "Salaries should only contain digits";
     public static final String VALIDATION_REGEX = "\\d+";
-    public final int value;
+    public final String value;
 
     /**
      * Constructs a {@code Salary}.
      *
      * @param salary A valid salary.
      */
-    public Salary(int salary) {
+    public Salary(String salary) {
         checkArgument(isValidSalary(String.valueOf(salary)), MESSAGE_CONSTRAINTS);
         value = salary;
     }
@@ -33,7 +33,7 @@ public class Salary {
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return value;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class Salary {
         }
 
         Salary otherSalary = (Salary) other;
-        return value == otherSalary.value;
+        return value.equals(otherSalary.value);
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(value);
+        return value.hashCode();
     }
 
 }
