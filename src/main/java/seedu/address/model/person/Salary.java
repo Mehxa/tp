@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -20,6 +21,7 @@ public class Salary {
      * @param salary A valid salary.
      */
     public Salary(String salary) {
+        requireNonNull(salary);
         checkArgument(isValidSalary(String.valueOf(salary)), MESSAGE_CONSTRAINTS);
         value = salary;
     }

@@ -108,7 +108,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        String effectiveSalary = (salary == null) ? "" : salary;
+        final String effectiveSalary = (salary == null) ? "" : salary;
         if (!Salary.isValidSalary(effectiveSalary)) {
             throw new IllegalValueException(Salary.MESSAGE_CONSTRAINTS);
         }
