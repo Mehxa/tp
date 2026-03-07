@@ -91,6 +91,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
+        getRoot().centerOnScreen();
         getRoot().requestFocus();
     }
 
