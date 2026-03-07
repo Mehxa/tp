@@ -42,6 +42,14 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Sets the help message to be displayed.
+     */
+    public void setHelpMessage(String helpMessage) {
+        this.helpMessage.setText(helpMessage);
+        getRoot().sizeToScene();
+    }
+
+    /**
      * Shows the help window.
      * @throws IllegalStateException
      *     <ul>
