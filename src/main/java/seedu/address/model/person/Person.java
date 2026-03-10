@@ -156,7 +156,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("salary", salary)
-                .add("certs", certs)
+                .add("certificates", certs)
                 .toString();
     }
 
