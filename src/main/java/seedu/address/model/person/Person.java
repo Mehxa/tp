@@ -96,6 +96,15 @@ public class Person {
                 .reduce(0, (x,y) -> x + y) >= 1);
     }
 
+    public int getCertIndex(Certificate cert) {
+        for (int i = 0; i < this.certs.size(); i++) {
+            if (certs.get(i).isSameCert(cert)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

@@ -17,7 +17,7 @@ public class Certificate {
 
     public Certificate(CertName name) {
         this.name = name;
-        this.expiry = new CertExpiry(LocalDate.parse("999999-31-31"));
+        this.expiry = new CertExpiry(LocalDate.parse("9999-12-31"));
     }
 
     public Certificate(CertName name, CertExpiry expiry) {

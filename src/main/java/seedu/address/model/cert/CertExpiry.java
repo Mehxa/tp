@@ -25,4 +25,9 @@ public class CertExpiry {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return this.expiryDate.toString();
+    }
 }
