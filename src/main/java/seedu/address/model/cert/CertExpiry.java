@@ -10,7 +10,6 @@ public class CertExpiry {
     public static final String MESSAGE_CONSTRAINTS =
             "Certificate expiry dates should be in the format of yyyy-mm-dd.";
     private LocalDate expiryDate;
-    private LocalDate expiryDate;
 
     public CertExpiry(LocalDate expiry) {
         expiryDate = expiry;
