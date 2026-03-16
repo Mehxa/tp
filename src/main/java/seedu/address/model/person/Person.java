@@ -2,15 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.cert.Certificate;
-
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.cert.Certificate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,7 +30,7 @@ public class Person {
     private ArrayList<Certificate> certs;
 
     /**
-     * Every field must be present and not null.
+     * Every field except certificates must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Salary salary) {
         requireAllNonNull(name, phone, email, address, tags, salary);
@@ -44,8 +43,11 @@ public class Person {
         this.certs = new ArrayList<Certificate>();
     }
 
-    public Person(Name name, Phone phone, 
-                Email email, Address address, Set<Tag> tags, 
+    /**
+     * Overloaded constructor to create a Person with existing certificates.
+     */
+    public Person(Name name, Phone phone,
+                Email email, Address address, Set<Tag> tags,
                 Salary salary, ArrayList<Certificate> certs) {
         requireAllNonNull(name, phone, email, address, tags, salary);
         this.name = name;
@@ -89,16 +91,21 @@ public class Person {
         return certs;
     }
 
+    /**
+     * Checks if this person already has this certificate.
+     * @param cert Certificate to be checked against.
+     * @return true if the certificate exists in this person's list of certificates, false otherwise.
+     */
     public boolean hasCert(Certificate cert) {
         return (this.certs.stream()
                 .filter(x -> x.isSameCert(cert))
                 .map(x -> 1)
-                .reduce(0, (x,y) -> x + y) >= 1);
+                .reduce(0, (x, y) -> x + y) >= 1);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both persons have the same phone and email.
+     * This defines a stronger notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -106,7 +113,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -149,7 +157,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("salary", salary)
-                .add("certs", certs)
+                .add("certificates", certs)
                 .toString();
     }
 

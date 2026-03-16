@@ -10,8 +10,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.cert.CertName;
 import seedu.address.model.cert.CertExpiry;
+import seedu.address.model.cert.CertName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -125,6 +125,9 @@ public class ParserUtil {
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (!Tag.isValidTagLength(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS_LENGTH);
         }
         return new Tag(trimmedTag);
     }
