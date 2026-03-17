@@ -42,4 +42,9 @@ public class CertExpiry {
     public int hashCode() {
         return expiryDate.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return this.expiryDate.toString();
+    }
 }

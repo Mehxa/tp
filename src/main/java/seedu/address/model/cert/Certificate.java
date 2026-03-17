@@ -28,11 +28,11 @@ public class Certificate {
         this.expiry = expiry;
     }
 
-    CertName getName() {
+    public CertName getName() {
         return name;
     }
 
-    CertExpiry getExpiry() {
+    public CertExpiry getExpiry() {
         return expiry;
     }
 
