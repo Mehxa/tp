@@ -37,14 +37,14 @@ public class CertDeleteCommandTest {
     public void execute_delCertSuccessful() throws Exception {
         ArrayList<Certificate> certList = new ArrayList<Certificate>();
         certList.add(new Certificate(new CertName("cert")));
-        Person personWithCert = new PersonBuilder().withName("John").withPhone("88888888")
+        Person personWithCert = new PersonBuilder().withName("John").withPhone("+65 88888888")
                 .withEmail("john@gmail.com").withAddress("yishun").withSalary("2000")
                 .withCertificates(certList).build();
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
         model.addPerson(personWithCert);
         CertDeleteCommand certDeleteCommand = new CertDeleteCommand(INDEX_FIRST_PERSON,
                 new Certificate(new CertName("cert")));
-        Person personWithoutCert = new PersonBuilder().withName("John").withPhone("88888888")
+        Person personWithoutCert = new PersonBuilder().withName("John").withPhone("+65 88888888")
                 .withEmail("john@gmail.com").withAddress("yishun").withSalary("2000")
                 .withCertificates(new ArrayList<Certificate>()).build();
         String expectedMessage = String.format(CertDeleteCommand.MESSAGE_SUCCESS, Messages.format(personWithoutCert));
@@ -57,14 +57,14 @@ public class CertDeleteCommandTest {
     public void execute_delCertDifferentExpiryDateSuccessful() throws Exception {
         ArrayList<Certificate> certList = new ArrayList<Certificate>();
         certList.add(new Certificate(new CertName("cert"), new CertExpiry(LocalDate.parse("2028-03-05"))));
-        Person personWithCert = new PersonBuilder().withName("John").withPhone("88888888")
+        Person personWithCert = new PersonBuilder().withName("John").withPhone("+65 88888888")
                 .withEmail("john@gmail.com").withAddress("yishun").withSalary("2000")
                 .withCertificates(certList).build();
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
         model.addPerson(personWithCert);
         CertDeleteCommand certDeleteCommand = new CertDeleteCommand(INDEX_FIRST_PERSON,
                 new Certificate(new CertName("cert")));
-        Person personWithoutCert = new PersonBuilder().withName("John").withPhone("88888888")
+        Person personWithoutCert = new PersonBuilder().withName("John").withPhone("+65 88888888")
                 .withEmail("john@gmail.com").withAddress("yishun").withSalary("2000")
                 .withCertificates(new ArrayList<Certificate>()).build();
         String expectedMessage = String.format(CertDeleteCommand.MESSAGE_SUCCESS, Messages.format(personWithoutCert));
@@ -76,7 +76,7 @@ public class CertDeleteCommandTest {
     @Test
     public void execute_nonexistentCert_throwsCommandException() {
         ArrayList<Certificate> certList = new ArrayList<>();
-        Person personWithoutCert = new Person(new Name("John"), new Phone("88888888"),
+        Person personWithoutCert = new Person(new Name("John"), new Phone("+65 88888888"),
                 new Email("john@gmail.com"), new Address("yishun"), new HashSet<Tag>(),
                 new Salary("2000"), certList);
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
