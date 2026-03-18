@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
@@ -36,15 +38,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String[] nameKeywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
-            predicateToFind = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
+            predicateToFind = getNamePredicate(argMultimap);
         }
 
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            Set<Tag> tags = ParserUtil.parseTags(Set.of(argMultimap
-                    .getValue(PREFIX_TAG).get().split("\\s+")));
-            System.out.println(tags);
-            predicateToFind = new TagContainsKeywordsPredicate(tags);
+            predicateToFind = getTagPredicate(argMultimap);
         }
 
         return new FindCommand(predicateToFind);
@@ -56,6 +54,24 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private NameContainsKeywordsPredicate getNamePredicate(ArgumentMultimap argMultimap) {
+        List<String> names = argMultimap.getAllValues(PREFIX_NAME);
+        return new NameContainsKeywordsPredicate(names);
+    }
+
+    private TagContainsKeywordsPredicate getTagPredicate(ArgumentMultimap argMultimap) {
+        List<Set<Tag>> tagGroups = argMultimap.getAllValues(PREFIX_TAG).stream()
+                .map(this::parseAndGroupTags)
+                .collect(Collectors.toList());
+        return new TagContainsKeywordsPredicate(tagGroups);
+    }
+
+    private Set<Tag> parseAndGroupTags(String tagEntry) {
+        return Arrays.stream(tagEntry.trim().split("\\s+"))
+                .map(Tag::new)
+                .collect(Collectors.toSet());
     }
 
 }
