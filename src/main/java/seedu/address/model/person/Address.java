@@ -16,7 +16,7 @@ public class Address {
 
     /**
      * (1) Must not exceed 100 characters.
-     * (2) Only alphanumeric characters, spaces, and (# , - /) are allowed.
+     * (2) Only alphanumeric characters, spaces, and (# , -) are allowed.
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s#\\-,]{0,100}$";
 
