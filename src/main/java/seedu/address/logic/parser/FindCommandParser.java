@@ -2,14 +2,23 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.CombinedPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -22,24 +31,52 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        List<Predicate<Person>> predicates = new ArrayList<>();
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG)
+                || !argMultimap.getPreamble().trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String[] nameKeywords = name.fullName.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            predicates.add(getNamePredicate(argMultimap));
+        }
+
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            predicates.add(getTagPredicate(argMultimap));
+        }
+
+        return new FindCommand(new CombinedPredicate(predicates));
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if at least one of the prefixes contain a value in the given
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private NameContainsKeywordsPredicate getNamePredicate(ArgumentMultimap argMultimap) {
+        List<String> names = argMultimap.getAllValues(PREFIX_NAME)
+            .stream().map(String::strip).collect(Collectors.toList());
+        names.replaceAll(String::trim);
+        System.out.println(names);
+        return new NameContainsKeywordsPredicate(names);
+    }
+
+    private TagContainsKeywordsPredicate getTagPredicate(ArgumentMultimap argMultimap) {
+        List<Set<Tag>> tagGroups = argMultimap.getAllValues(PREFIX_TAG).stream()
+                .map(this::parseAndGroupTags)
+                .collect(Collectors.toList());
+        return new TagContainsKeywordsPredicate(tagGroups);
+    }
+
+    private Set<Tag> parseAndGroupTags(String tagEntry) {
+        return Arrays.stream(tagEntry.trim().split("\\s+"))
+                .map(Tag::new)
+                .collect(Collectors.toSet());
     }
 
 }
