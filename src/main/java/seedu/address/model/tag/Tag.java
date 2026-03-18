@@ -11,10 +11,12 @@ import seedu.address.commons.util.StringUtil;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag names can only consist of alphanumeric characters"
-            + " and certain special characters such as '!@#$?/|<>_*&:;='";
-    public static final String MESSAGE_CONSTRAINTS_LENGTH = "Tags names should be short."
-            + "Less than equal to 30 characters";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Tag names should consist of only alphanumeric characters,\n"
+            + "and these special characters !@#$?/|<>_*&:;=";
+
+    public static final String MESSAGE_CONSTRAINTS_LENGTH =
+            "Tags names should be at most 30 characters long.";
 
     // Note: If the below rules are too lax, revert back to "\\p{Alnum}+"
     // i.e. Only alphanumeric characters instead
