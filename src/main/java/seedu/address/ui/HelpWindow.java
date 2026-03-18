@@ -21,7 +21,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "    'clear' : deletes all existing contacts\n"
             + " * 'cert-add' : adds a certificate to an existing contact\n"
             + " * 'cert-del' : deletes a certificate from an existing contact\n"
-            + " * 'tag' : adds or deletes tag from an existing contact\n"
+            + " * 'tag' : adds or deletes tags from an existing contact\n"
             + " * 'find' : finds existing contacts based on search criteria\n"
             + "    'list' : lists all existing contacts\n"
             + "    'exit' : exits the applications\n"
