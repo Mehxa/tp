@@ -115,8 +115,8 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 
 > [**SALARY**]<br>
 > (1) Can be empty<br>
-> (2) Only digits
-> Duplicate-handling:
+> (2) Only digits<br>
+> Duplicate-handling: exact match<br>
 
 > [**PERSON duplicate handling**]<br>
 > (1) EMAIL and PHONE_NUMBER are empty: duplicates if NAMEs are the same<br>
