@@ -84,6 +84,20 @@ public class AddCommandTest {
         assertEquals(expected, addCommand.toString());
     }
 
+    @Test
+    public void execute_nullPersonAssertion_throwsAssertionError() {
+        AddCommand addCommand = new AddCommand(ALICE);
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        try {
+            java.lang.reflect.Field field = AddCommand.class.getDeclaredField("toAdd");
+            field.setAccessible(true);
+            field.set(addCommand, null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        assertThrows(AssertionError.class, () -> addCommand.execute(modelStub));
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
