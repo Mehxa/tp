@@ -7,7 +7,7 @@
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <ScrollPane fx:id="scrollPane" fitToWidth="true" fitToHeight="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS" styleClass="scroll-pane">
     <VBox>
-      <GridPane fx:id="personGridPane" VBox.vgrow="ALWAYS" />
+      <GridPane fx:id="personGridPane" VBox.vgrow="ALWAYS" styleClass="grid-pane"/>
     </VBox>
   </ScrollPane>
 </VBox>

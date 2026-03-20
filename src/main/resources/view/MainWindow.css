@@ -38,7 +38,7 @@
     -fx-text-fill: white;
 }
 
-/* Standardised ScrollPane */
+/* Body: contact list */
 .scroll-pane {
     -fx-background-color: #012442;
 }
@@ -55,6 +55,10 @@
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
     -fx-padding: 0 0 0 0;
+}
+
+.grid-pane {
+    -fx-background-color: #012442;
 }
 
 /* Footer: status bar */
