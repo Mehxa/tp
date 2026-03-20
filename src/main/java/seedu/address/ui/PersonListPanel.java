@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.GridPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
@@ -19,18 +19,20 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String EVEN_ROW_COLOUR = "-fx-background-color: #383c50;";
 
     private static final String FXML = "PersonListPanel.fxml";
-    private static final int MIN_TILE_WIDTH = 340;
-    private static final int PAD_AND_SCROLL_BAR_WIDTH = 55;
+
+    private static final int ENTRY_HEIGHT = 400;
+    private static final int MIN_ENTRY_WIDTH = 340;
+    private static final int SCROLL_BAR_WIDTH = 15;
 
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
     private final ObservableList<Person> personList;
     private int numColumns;
 
     @FXML
-    private ScrollPane personScrollPane;
+    private ScrollPane scrollPane;
 
     @FXML
-    private TilePane personTilePane;
+    private GridPane personGridPane;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -42,60 +44,31 @@ public class PersonListPanel extends UiPart<Region> {
         this.personList = personList;
         this.numColumns = 1;
 
-        int usableWidth = (int) primaryStageWidth - PAD_AND_SCROLL_BAR_WIDTH;
-        updateTileWidth(usableWidth);
-        updateTilePane();
+        int usableWidth = (int) primaryStageWidth - SCROLL_BAR_WIDTH;
+        updateEntryWidth(usableWidth);
+        updateDisplay();
     }
 
-    private void updateTileWidth(int usableWidth) {
-        this.numColumns = usableWidth / MIN_TILE_WIDTH;
-        this.numColumns = (numColumns <= 0) ? 1 : this.numColumns;
-        assert this.numColumns > 0 : "Num columns <= 0";
-
-        int extraTileWidth = usableWidth % MIN_TILE_WIDTH / this.numColumns;
-        int updatedTileWidth = MIN_TILE_WIDTH + extraTileWidth;
-
-        this.personTilePane.setPrefTileWidth(updatedTileWidth);
+    private void updateEntryWidth(int usableWidth) {
+        System.out.println("!!!" + usableWidth);
     }
 
-    private void updateTilePane() {
-        this.personTilePane.getChildren().clear();
-
-        int row = 1;
-        int col = 1;
-        int index = 1;
-
-        for (Person person : this.personList) {
-            PersonCard p = new PersonCard(person, index++);
-            String colour = (row % 2 == 1) ? ODD_ROW_COLOUR : EVEN_ROW_COLOUR;
-            p.getRoot().setStyle(colour);
-            this.personTilePane.getChildren().add(p.getRoot());
-
-            if (col == this.numColumns) {
-                row++;
-                col = 1;
-            } else {
-                col++;
-            }
-        }
-
-        this.personScrollPane.setVvalue(0); // reset scroll to top
+    private void updateDisplay() {
+        this.scrollPane.setVvalue(0); // reset scroll to top
     }
 
     /**
-     * Sets up listeners so {@code TilePane} updates with personList and window resizing.
+     * Sets up listeners so the display updates when personList changes or window resizes.
      */
     public void setUpListeners() {
-        // Sets up a listener that updates the TilePane upon change of the personList.
         this.personList.addListener((ListChangeListener<Person>) change -> {
-            updateTilePane();
+            updateDisplay();
         });
 
-        // Sets up a listener that updates the TilePane upon resizing of the ScrollPane.
-        this.personScrollPane.viewportBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
+        this.scrollPane.viewportBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
             int scrollPaneWidth = (int) newBounds.getWidth();
-            updateTileWidth(scrollPaneWidth);
-            updateTilePane();
+            updateEntryWidth(scrollPaneWidth);
+            updateDisplay();
         });
     }
 }
