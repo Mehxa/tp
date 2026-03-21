@@ -24,11 +24,24 @@ test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 
+    exclude '**/ui/**'
+}
+
+task testGui(type: Test) {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+
+    include '**/ui/**'
+
     systemProperty "testfx.robot", "glass"
     systemProperty "testfx.headless", "true"
     systemProperty "prism.order", "sw"
     systemProperty "prism.text", "t2k"
     systemProperty "java.awt.headless", "true"
+}
+
+jacocoTestReport {
+    executionData fileTree(buildDir).include("jacoco/*.exec")
 }
 
 task coverage(type: JacocoReport) {
