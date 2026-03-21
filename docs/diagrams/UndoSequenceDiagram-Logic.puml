@@ -48,4 +48,5 @@ destroy UndoCommand
 
 [<-- LogicManager : result
 deactivate LogicManager
+
 @enduml

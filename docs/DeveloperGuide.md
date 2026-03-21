@@ -386,11 +386,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. The tag specified cannot be found.
-    
+
     * 3b1. Big Brother shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: UC5 Find a person**
 
 **MSS**
