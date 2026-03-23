@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,7 +19,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.TagColour;
+import seedu.address.model.tag.TagColour;
+import seedu.address.model.tag.TagNameComparator;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -159,7 +160,7 @@ public class ParserUtil {
     private static Set<Tag> parseTags(Collection<String> tags, TagColour tagColour) throws ParseException {
         requireNonNull(tags);
 
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new TreeSet<>(new TagNameComparator());
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName, tagColour));
         }

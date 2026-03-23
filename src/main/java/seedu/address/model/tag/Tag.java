@@ -4,7 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.ui.TagColour;
+
+import java.util.Comparator;
 
 /**
  * Represents a Tag in the address book.
@@ -84,10 +85,8 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equals(otherTag.tagName) && tagColour.equals(otherTag.tagColour);
     }
-
-
 
     @Override
     public int hashCode() {

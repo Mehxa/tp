@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagNameComparator;
 
 /**
  * Parses input arguments and creates a new TagCommand object
@@ -34,8 +35,8 @@ public class TagCommandParser implements Parser<TagCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_TAG, PREFIX_DELETE_TAG, PREFIX_COLOUR_TAG);
 
         Index index;
-        Set<Tag> tagsToAdd = new HashSet<>();
-        Set<Tag> tagsToDelete = new HashSet<>();
+        Set<Tag> tagsToAdd = new TreeSet<>(new TagNameComparator());
+        Set<Tag> tagsToDelete = new TreeSet<>(new TagNameComparator());
         Optional<String> colourGiven = argMultimap.getValue(PREFIX_COLOUR_TAG);
 
         try {

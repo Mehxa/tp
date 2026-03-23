@@ -12,7 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +25,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagNameComparator;
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
@@ -39,7 +41,8 @@ public class TagCommandTest {
         Set<Tag> toAdd = Set.of(new Tag("Test"));
         Set<Tag> toDelete = Set.of(new Tag("friends"));
 
-        Set<Tag> newTags = new HashSet<Tag>(originalPerson.getTags());
+        Set<Tag> newTags = new TreeSet<Tag>(new TagNameComparator());
+        newTags.addAll(originalPerson.getTags());
         newTags.addAll(toAdd);
         newTags.removeAll(toDelete);
 
@@ -67,7 +70,8 @@ public class TagCommandTest {
 
         Set<Tag> toAdd = Set.of(new Tag("Test"));
 
-        Set<Tag> newTags = new HashSet<Tag>(originalPerson.getTags());
+        Set<Tag> newTags = new TreeSet<Tag>(new TagNameComparator());
+        newTags.addAll(originalPerson.getTags());
         newTags.addAll(toAdd);
 
         Person editedPerson = new Person(originalPerson.getName(),
@@ -92,7 +96,8 @@ public class TagCommandTest {
     public void execute_deleteTagsUnfilteredList_success() {
         Person originalPerson = model.getFilteredPersonList().get(0);
 
-        Set<Tag> toDelete = new HashSet<Tag>(originalPerson.getTags());
+        Set<Tag> toDelete = new TreeSet<Tag>(new TagNameComparator());
+        toDelete.addAll(originalPerson.getTags());
 
         assert(!toDelete.isEmpty());
 
@@ -118,7 +123,7 @@ public class TagCommandTest {
     public void execute_deleteNonexistentTagsUnfilteredList_failure() {
         Person originalPerson = model.getFilteredPersonList().get(0);
 
-        Set<Tag> toDelete = new HashSet<Tag>();
+        Set<Tag> toDelete = new TreeSet<Tag>(new TagNameComparator());
         toDelete.add(new Tag("Non-existent"));
 
         Person editedPerson = new Person(originalPerson.getName(),
@@ -140,7 +145,7 @@ public class TagCommandTest {
     public void execute_addDeleteSameTagUnfilteredList_failure() {
         Person originalPerson = model.getFilteredPersonList().get(0);
 
-        Set<Tag> tags = new HashSet<Tag>();
+        Set<Tag> tags = new TreeSet<Tag>(new TagNameComparator());
         tags.add(new Tag("Tag"));
 
         Person editedPerson = new Person(originalPerson.getName(),
@@ -162,7 +167,8 @@ public class TagCommandTest {
     public void execute_noFieldsSpecifiedUnfilteredList_failure() {
         Person originalPerson = model.getFilteredPersonList().get(0);
 
-        Set<Tag> sameTags = new HashSet<Tag>(originalPerson.getTags());
+        Set<Tag> sameTags = new TreeSet<>(new TagNameComparator());
+        sameTags.addAll(originalPerson.getTags());
 
         Person editedPerson = new Person(originalPerson.getName(),
                 originalPerson.getPhone(),
@@ -189,7 +195,9 @@ public class TagCommandTest {
         Set<Tag> toAdd = Set.of(new Tag("Test"));
         Set<Tag> toDelete = Set.of(new Tag("friends"));
 
-        Set<Tag> newTags = new HashSet<Tag>(originalPerson.getTags());
+        Set<Tag> newTags = new TreeSet<>(new TagNameComparator());
+        newTags.addAll(originalPerson.getTags());
+
         newTags.addAll(toAdd);
         newTags.removeAll(toDelete);
 

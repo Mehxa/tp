@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +21,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagColourComparator;
+import seedu.address.model.tag.TagNameComparator;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -97,7 +99,9 @@ public class TagCommand extends Command {
         Address address = personToEdit.getAddress();
         Salary updatedSalary = personToEdit.getSalary();
 
-        Set<Tag> updatedTags = new HashSet<>(tagsToAdd);
+        Set<Tag> updatedTags = new TreeSet<>(new TagNameComparator());
+        updatedTags.addAll(tagsToAdd);
+        System.out.println(personToEdit.getTags());
         updatedTags.addAll(personToEdit.getTags());
         updatedTags.removeAll(tagsToDelete);
 
