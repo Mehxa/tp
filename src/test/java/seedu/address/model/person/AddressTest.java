@@ -28,6 +28,7 @@ public class AddressTest {
 
 
         // valid addresses
+        assertTrue(Address.isValidAddress(null));
         assertTrue(Address.isValidAddress("")); // empty string
         assertTrue(Address.isValidAddress(" ")); // spaces only
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));

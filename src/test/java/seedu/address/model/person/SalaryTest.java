@@ -38,6 +38,7 @@ public class SalaryTest {
         assertFalse(Salary.isValidSalary("9011p")); // alphabets within digits
 
         // valid salary
+        assertTrue(Salary.isValidSalary(null));
         assertTrue(Salary.isValidSalary(" ")); // spaces only
         assertTrue(Salary.isValidSalary("")); // empty string for optional field
         assertTrue(Salary.isValidSalary("0"));
