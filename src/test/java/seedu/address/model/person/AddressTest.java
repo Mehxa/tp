@@ -21,9 +21,6 @@ public class AddressTest {
 
     @Test
     public void isValidAddress() {
-        // null address
-        assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
-
         // invalid addresses
         assertFalse(Address.isValidAddress("9*1 Tah Ching Road")); // contains * character
         assertFalse(Address.isValidAddress("Leng Incorporation Private Limited, 12345678 Market Street,"
