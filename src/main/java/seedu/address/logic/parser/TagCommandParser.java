@@ -16,9 +16,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.TagColour;
-
-import javax.swing.text.html.Option;
 
 /**
  * Parses input arguments and creates a new TagCommand object

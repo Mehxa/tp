@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.Optional;
 
 /**

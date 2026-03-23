@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.TagColour;
 
-import java.util.Optional;
 
 /**
  * Jackson-friendly version of {@link Tag}.
@@ -58,8 +58,8 @@ class JsonAdaptedTag {
         }
 
         Optional<TagColour> tagColour = TagColour.getTagColourByUserInputName(tagColourString);
-        return tagColour.map(colour -> new Tag(tagName, colour)).orElseGet(
-                () -> new Tag(tagName, TagColour.DEFAULT));
+        return tagColour.map(colour -> new Tag(tagName, colour)).orElseGet(() ->
+                new Tag(tagName, TagColour.DEFAULT));
 
     }
 

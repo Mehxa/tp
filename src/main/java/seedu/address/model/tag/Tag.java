@@ -25,6 +25,7 @@ public class Tag {
     public static final Integer MAX_LENGTH = 30;
     public final String tagName;
     public final TagColour tagColour;
+
     /**
      * Constructs a {@code Tag}.
      *
@@ -38,6 +39,12 @@ public class Tag {
         this.tagColour = TagColour.DEFAULT;
     }
 
+    /**
+     * Constructs a {@code Tag}.
+     *
+     * @param tagName A valid tag name.
+     * @param tagColour A valid colour for the Tag.
+     */
     public Tag(String tagName, TagColour tagColour) {
         requireNonNull(tagName);
         requireNonNull(tagColour);

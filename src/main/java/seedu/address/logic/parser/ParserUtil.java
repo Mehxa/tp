@@ -21,9 +21,6 @@ import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.TagColour;
 
-import javax.swing.text.html.Option;
-
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
