@@ -179,7 +179,7 @@ public class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, Set.of(), Set.of());
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_NOT_TAGS_PROVIDED);
+        String expectedMessage = String.format(TagCommand.MESSAGE_NO_TAGS_PROVIDED);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);

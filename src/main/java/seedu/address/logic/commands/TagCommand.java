@@ -42,7 +42,7 @@ public class TagCommand extends Command {
             COMMAND_WORD, PREFIX_ADD_TAG, PREFIX_DELETE_TAG);
 
     public static final String MESSAGE_TAG_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_TAGS_PROVIDED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NO_TAGS_PROVIDED = "At least one a/ or d/ must be provided.";
     public static final String MESSAGE_NOT_EDITED = "No tags were changed.";
 
     private final Index targetIndex;
@@ -68,7 +68,7 @@ public class TagCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (tagsToAdd.isEmpty() && tagsToDelete.isEmpty()) {
-            throw new CommandException(MESSAGE_NOT_TAGS_PROVIDED);
+            throw new CommandException(MESSAGE_NO_TAGS_PROVIDED);
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -104,7 +104,6 @@ public class TagCommand extends Command {
 
         Set<Tag> updatedTags = new TreeSet<>(new TagNameComparator());
         updatedTags.addAll(tagsToAdd);
-        System.out.println(personToEdit.getTags());
         updatedTags.addAll(personToEdit.getTags());
         updatedTags.removeAll(tagsToDelete);
 
