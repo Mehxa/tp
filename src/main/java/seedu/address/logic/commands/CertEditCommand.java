@@ -82,7 +82,7 @@ public class CertEditCommand extends Command {
 
         Certificate updatedCert = this.getUpdatedCert();
 
-        if (personToEdit.hasCert(updatedCert)) {
+        if (newName.isPresent() && personToEdit.hasCert(updatedCert)) {
             throw new CommandException(MESSAGE_DUPLICATE_CERT);
         }
 
