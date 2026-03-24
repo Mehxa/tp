@@ -36,9 +36,6 @@ public class CertDeleteCommand extends Command {
             COMMAND_WORD, PREFIX_CERT_NAME,
             COMMAND_WORD, PREFIX_CERT_NAME);
 
-    public static final String MESSAGE_SUCCESS = "Certificate deleted: %1$s";
-    public static final String MESSAGE_MISSING_CERT = "This person does not have this certificate.";
-
     private final Index index;
     private final Certificate toDel;
 
@@ -65,13 +62,14 @@ public class CertDeleteCommand extends Command {
         Person personToDeleteFrom = lastShownList.get(index.getZeroBased());
 
         if (!personToDeleteFrom.hasCert(toDel)) {
-            throw new CommandException(MESSAGE_MISSING_CERT);
+            throw new CommandException(Messages.MESSAGE_MISSING_CERT);
         }
         Person personDeletedFrom = deleteCertFromPerson(personToDeleteFrom, toDel);
 
         model.setPerson(personToDeleteFrom, personDeletedFrom);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personDeletedFrom)));
+        return new CommandResult(String.format(Messages.MESSAGE_CERT_DELETE_SUCCESS,
+            Messages.format(personDeletedFrom)));
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.commands.CommandTestUtil.MULTI_TAG_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MULTI_TAG_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -35,7 +36,7 @@ public class TagCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", TagCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

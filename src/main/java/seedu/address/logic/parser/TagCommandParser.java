@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -57,7 +58,7 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         if ((tagsToAdd.isEmpty() && tagsToDelete.isEmpty())) {
-            throw new ParseException(String.format(TagCommand.MESSAGE_NOT_EDITED));
+            throw new ParseException(String.format(Messages.MESSAGE_NOT_EDITED));
         }
 
         return new TagCommand(index, tagsToAdd, tagsToDelete);

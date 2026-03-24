@@ -24,8 +24,6 @@ public class DeleteCommand extends Command {
             + "Example : %s 1",
             COMMAND_WORD, COMMAND_WORD, COMMAND_WORD);
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -44,7 +42,8 @@ public class DeleteCommand extends Command {
         model.commitAddressBook();
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(Messages.MESSAGE_DELETE_PERSON_SUCCESS,
+            Messages.format(personToDelete)));
     }
 
     @Override

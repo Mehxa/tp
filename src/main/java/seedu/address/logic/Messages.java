@@ -19,6 +19,28 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+    public static final String LIST_MESSAGE_SUCCESS = "Listed all persons";
+
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
+    public static final String MESSAGE_TAG_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_NOT_TAGS_PROVIDED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_TAGS_EDITED = "No tags were changed.";
+
+    public static final String MESSAGE_CERT_ADD_SUCCESS = "New certificate added: %1$s";
+    public static final String MESSAGE_CERT_EDIT_SUCCESS = "Certificate edited: %1$s";
+    public static final String MESSAGE_CERT_DELETE_SUCCESS = "Certificate deleted: %1$s";
+    public static final String MESSAGE_MISSING_CERT = "This person does not have this certificate.";
+    public static final String MESSAGE_DUPLICATE_CERT = "This person already has this certificate.";
+
+    public static final String UNDO_MESSAGE_SUCCESS = "Undid the previous command.";
+    public static final String UNDO_MESSAGE_FAILURE = "No previous commands to undo.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -37,9 +37,6 @@ public class CertAddCommand extends Command {
             COMMAND_WORD, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY,
             COMMAND_WORD, PREFIX_CERT_NAME, PREFIX_CERT_EXPIRY);
 
-    public static final String MESSAGE_SUCCESS = "New certificate added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CERT = "This person already has this certificate.";
-
     private final Index index;
     private final Certificate toAdd;
 
@@ -66,13 +63,13 @@ public class CertAddCommand extends Command {
         Person personToAddTo = lastShownList.get(index.getZeroBased());
 
         if (personToAddTo.hasCert(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CERT);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_CERT);
         }
         Person personAddedTo = addCertToPerson(personToAddTo, toAdd);
 
         model.setPerson(personToAddTo, personAddedTo);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personAddedTo)));
+        return new CommandResult(String.format(Messages.MESSAGE_CERT_ADD_SUCCESS, Messages.format(personAddedTo)));
     }
 
     private static Person addCertToPerson(Person personToAddTo, Certificate cert) {

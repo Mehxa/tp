@@ -44,8 +44,6 @@ public class CertEditCommand extends Command {
             + PREFIX_CERT_NAME + "Social Media Marketing "
             + PREFIX_CERT_EDIT_DATE + "2028-03-05";
 
-    public static final String MESSAGE_SUCCESS = "Certificate edited: %1$s";
-    public static final String MESSAGE_MISSING_CERT = "This person does not have this certificate.";
 
     private final Index index;
     private final Certificate toEdit;
@@ -75,16 +73,20 @@ public class CertEditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         if (!personToEdit.hasCert(toEdit)) {
-            throw new CommandException(MESSAGE_MISSING_CERT);
+            throw new CommandException(Messages.MESSAGE_MISSING_CERT);
         }
 
         Certificate updatedCert = this.getUpdatedCert();
+
+        if (personToEdit.hasCert(updatedCert)) {
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_CERT);
+        }
 
         Person personEdited = editCertForPerson(personToEdit, toEdit, updatedCert);
 
         model.setPerson(personToEdit, personEdited);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personEdited)));
+        return new CommandResult(String.format(Messages.MESSAGE_CERT_EDIT_SUCCESS, Messages.format(personEdited)));
     }
 
     /**
@@ -114,7 +116,7 @@ public class CertEditCommand extends Command {
         }
 
         if (index < 0) {
-            throw new CommandException(MESSAGE_MISSING_CERT);
+            throw new CommandException(Messages.MESSAGE_MISSING_CERT);
         }
         // set the new cert
         certList.set(index, updatedCert);
