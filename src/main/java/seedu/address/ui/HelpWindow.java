@@ -26,6 +26,7 @@ public class HelpWindow extends UiPart<Stage> {
             + " * 'tag' : adds or deletes tags from an existing contact\n"
             + " * 'sort' : sorts the contact list based on given criteria\n"
             + " * 'find' : finds existing contacts based on search criteria\n"
+            + "    'undo' : restores contact list to immediate previous state if wrong command called\n"
             + "    'list' : lists all existing contacts\n"
             + "    'exit' : exits the applications\n"
             + "    'help': shows this help menu\n\n"

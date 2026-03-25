@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,4 +85,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Saves the current address book state. */
+    void commitAddressBook();
+
+    /** Restores the address book to its previous state. */
+    void undoAddressBook();
+
+    /** Returns true if the model has a previous state to restore. */
+    boolean canUndo();
+
+    /** Sorts the filtered person list. */
+    void sort(Comparator<Person> comparator);
 }
