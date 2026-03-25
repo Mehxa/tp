@@ -64,6 +64,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicates.add(getCertExpPredicate(argMultimap));
         }
 
+        assert predicates != null;
         return new FindCommand(new CombinedPredicate(predicates));
     }
 
