@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -14,10 +15,13 @@ import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.cert.CertExpiry;
+import seedu.address.model.cert.CertName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagColour;
 import seedu.address.model.tag.TagNameComparator;
@@ -217,5 +221,64 @@ public class ParserUtilTest {
 
         // Negative salary
         assertThrows(ParseException.class, () -> ParserUtil.parseSalary("-100"));
+    }
+
+    @Test
+    public void parseName_extraWhitespace_returnsNormalizedName() throws Exception {
+        String nameWithSpaces = "  Mary    Lee  ";
+        Name expectedName = new Name("Mary Lee");
+        assertEquals(expectedName, ParserUtil.parseName(nameWithSpaces));
+    }
+
+    @Test
+    public void parsePhone_extraWhitespace_returnsNormalizedPhone() throws Exception {
+        String phoneWithSpaces = "   +65    91093749  ";
+        Phone expectedPhone = new Phone("+65 91093749");
+        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithSpaces));
+    }
+
+    @Test
+    public void parseEmail_extraWhitespace_returnsNormalizedEmail() throws Exception {
+        String emailWithSpaces = "  riceMedia@gmail.com  ";
+        Email expectedEmail = new Email("riceMedia@gmail.com");
+        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithSpaces));
+    }
+
+    @Test
+    public void parseAddress_extraWhitespace_returnsNormalizedAddress() throws Exception {
+        String addressWithSpaces = "  Blk   8  #08-109    Tah Ching   Road   S642928   ";
+        Address expectedAddress = new Address("Blk 8 #08-109 Tah Ching Road S642928");
+        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithSpaces));
+    }
+
+    @Test
+    public void parseSalary_extraWhitespace_returnsNormalizedSalary() throws Exception {
+        String salaryWithSpaces = "  8000   ";
+        Salary expectedSalary = new Salary("8000");
+        assertEquals(expectedSalary, ParserUtil.parseSalary(salaryWithSpaces));
+    }
+
+    @Test
+    public void parseTags_extraWhitespace_returnsNormalizedTags() throws Exception {
+        String tagsWithSpaces = "  HR     hr  ";
+        Set<Tag> expectedTagSet = new TreeSet<>(new TagNameComparator());
+        expectedTagSet.add(new Tag("HR"));
+        expectedTagSet.add(new Tag("hr"));
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList("  HR     ", "hr  "));
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseCertName_extraWhitespace_returnsNormalizedCertName() throws Exception {
+        String certNameWithSpaces = "  Accounting    Essentials   ";
+        CertName expectedCertName = new CertName("Accounting Essentials");
+        assertEquals(expectedCertName, ParserUtil.parseCertName(certNameWithSpaces));
+    }
+
+    @Test
+    public void parseCertExpiry_extraWhitespace_returnsNormalizedCertExpiry() throws Exception {
+        String certExpiryWithSpaces = "  2026-02-08   ";
+        CertExpiry expectedCertExpiry = new CertExpiry(LocalDate.parse("2026-02-08"));
+        assertEquals(expectedCertExpiry, ParserUtil.parseCertExpiry(certExpiryWithSpaces));
     }
 }

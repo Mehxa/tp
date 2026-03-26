@@ -115,7 +115,7 @@ public class ParserUtil {
         if (!Salary.isValidSalary(trimmedSalary)) {
             throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
-        return new Salary(salary);
+        return new Salary(trimmedSalary);
     }
 
     /**
