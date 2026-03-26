@@ -61,7 +61,7 @@ Big Brother is a desktop app for managing employee contacts, optimized for use v
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Navigating the GUI:
+### Navigating the GUI
 * The GUI is structured such that the main contacts list is a big scrollable section, and the contact entries are smaller scollable sections.
 
 * You can hover your mouse cursor over the desired scroll bar, then scroll each section independently.
@@ -193,26 +193,28 @@ Format: `list`
 
 <br>
 
-### Adding and deleting tags of a contact: `tag`
-Format: `tag INDEX [a/TAGS TO ADD SEPARATED BY SPACE] [c/COLOUR OF TAGS TO BE ADDED] [d/TAGS TO DELETE SEPARATED BY SPACE]`
+### Adding and deleting tags: `tag`
+Format: `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_FOR_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
 
-* Add or delete tags of the person at the specified `INDEX` of the displayed person list.
-* If multiple tags are to be added or deleted, they are to be separated by spaces.
-* There are 5 colour options for Tags: `RED`, `YELLOW`, `GREEN`, `BLUE`, `PURPLE`, the default colour is `BLUE`
-* **At least one of the `a/` or `d/` fields must be provided.** There is no need to have `c/` when only deleting tags 
+* Adds or deletes tags of the person at the specified `INDEX` of the displayed person list.
+* **At least one of the `a/` or `d/` fields must be provided.**
+* If multiple tags are to be added or deleted, their names are to be separated by spaces.
+* There are 5 colour options: `red`, `yellow`, `green`, `blue` (default), and `purple`.
+* When adding, specifying a colour applies the colour to all tags that are being added.
+* When deleting, the tags are deleted by name and not by colour.
 
 Examples:
-* `tag 1 a/IT Intern c/red` adds two Tags `IT` and `Intern` with a **RED** Colouration
-* `tag 1 d/Best_Employee` deletes a Tag `Best_Employee`
-* `tag 1 a/HR Best_Employee d/IT` adds two Tags `HR` and `Best_Employee`, while deleting `IT`
+1. `tag 1 a/IT Intern c/red` adds two tags `IT` and `Intern` with a **RED** colour.
+2. `tag 1 d/Best_Employee` deletes a tag `Best_Employee`.
+3. `tag 1 a/HR Best_Employee d/IT` adds two tags `HR` and `Best_Employee`, while deleting `IT`.
 
 <box type="info" seamless>
 
 **Validation & Duplicate-handling Rules**
 
-(1) Only alphanumeric characters and `!@#$?/|<>_*&:;=`<br>
-(2) At most 30 characters long<br>
-Duplicate-handling: exact match
+> (1) Only alphanumeric characters and `!@#$?|<>_*&:;=`<br>
+> (2) At most 30 characters long<br>
+> Duplicate-handling: case-sensitive match
 </box>
 
 <br>
