@@ -176,8 +176,8 @@ Format: `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 * For `NAME`, `TAG` and `CERT_NAME`, the match is case-insensitive and can match part of the word.
   * e.g. 'john' will match 'Johny'
 * For `CERT_EXPIRY_DATE`, the match is for certificates that expire **before** the provided date.
-* Multiple values of the same field can be used to expand the search (i.e. `OR` search), except for `CERT_EXPIRY`.
-* Multiple fields can be used to narrow down the search (i.e `AND` search).
+* A field can be used more than once to expand the search (i.e. `OR` search), except for `CERT_EXPIRY` (see Ex 1).
+* Multiple fields can be used to narrow down the search (i.e `AND` search) (see Ex 3).
 
 Examples:
 1. `find n/Alex Y n/David` returns all persons whose name contains `Alex Y` or `David`.
