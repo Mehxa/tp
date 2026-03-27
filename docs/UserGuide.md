@@ -188,7 +188,7 @@ Examples:
 Format: `list`
 
 ### Adding and deleting tags : `tag`
-Format: `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_FOR_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
+Format: `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
 
 * Adds or deletes tags of the person at the specified `INDEX` of the displayed person list.
 * **At least one of the `a/` or `d/` fields must be provided.**
@@ -297,7 +297,7 @@ Furthermore, certain edits can cause the Big Brother to behave in unexpected way
 `cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
 `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_CERT]`
 `cert-del INDEX n/CERT_NAME`
-`tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_FOR_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
+`tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
 `sort ...`
 `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 `list`
