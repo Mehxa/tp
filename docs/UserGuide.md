@@ -260,13 +260,16 @@ Example: `cert-edit 1 n/OSCP ne/OSCP2`
 
 <br>
 
-### Delete all entries : `clear`
+### Deleting all entries : `clear`
 Format: `clear`
 
 <br>
 
-### Restore the contact list to the immediate previous state : `undo`
+### Restoring the contact list : `undo`
 Format: `undo`
+
+* Limited to undoing exactly one command to restore the contact list to the immediate previous state.
+* Will do nothing if there is no previous state (e.g. restarting the app, consecutive attempts to undo).
 
 ### Exiting the program : `exit`
 Format: `exit`
