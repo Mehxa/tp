@@ -65,6 +65,8 @@ Big Brother is a desktop app for managing employee contacts, optimized for use v
 * Items in square brackets are optional. More explanations will be provided where they appear.<br>
   e.g `tag INDEX [a/TAG_NAME] [d/TAG_NAME]`.
 
+* `INDEX` **must be a positive integer** 1, 2, 3, ...
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -108,7 +110,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY`
 > [**NAME**]<br>
 > (1) **Cannot be empty**<br>
 > (2) Only letter, spaces, forward slash<br>
-> (3) Letters immediately beside forward slash must be uppercase<br>
+> (3) Letters immediately closest to forward slash must be uppercase<br>
 > Duplicate-handling: case-insensitive comparison<br>
 
 > [**PHONE_NUMBER**]<br>
@@ -156,7 +158,7 @@ Examples:
 ### Editing an existing contact : `edit`
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 
-* Edits the person at the specified `INDEX` of the the displayed person list.
+* Edits the person at the specified `INDEX` of the displayed person list.
 * **At least one of the optional fields must be provided.**
 * Existing values will be updated to the input values.
 
@@ -169,11 +171,11 @@ Examples:
 ### Deleting an existing contact : `delete`
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX` of the the displayed person list.
+* Deletes the person at the specified `INDEX` of the displayed person list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if present.
 
 <br>
 
@@ -233,7 +235,6 @@ Adds a Certificate to a person in the address book.
 Format `cert-add INDEX [n/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 * Adds a Certificate to a person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
 * A Certificate must have both a name and an expiry date.
 * Expiry dates must be formatted as **YYYY-MM-DD**.
 
@@ -241,7 +242,7 @@ Examples:
 * `cert-add 1 n/OSCP e/2028-03-05` adds a Certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
 
 > Note that:
-> - Certificate names are limited to alphanumeric characters only.
+> - Certificate names are case-sensitive and limited to alphanumeric characters only.
 > - Multiple instances of Certificates with the same name will be considered duplicates, even if the expiry dates are different.
 
 <br>
@@ -253,7 +254,6 @@ Deletes a Certificate from a person in the address book.
 Format `cert-del INDEX [n/CERT_NAME]`
 * Deletes a Certificate from a person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
 * The Certificate to be deleted is specified by only its name.
 
 Examples:
@@ -278,6 +278,8 @@ Examples:
 
 ### Clearing all entries : `clear`
 Format: `clear`
+
+> Tip: if you accidentally ran `clear`, you can run `undo` to restore your immediate previous contact list.
 
 <br>
 

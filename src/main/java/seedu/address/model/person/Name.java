@@ -11,7 +11,7 @@ public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should contain only letters, spaces and forward slashes.\n"
-            + "Letters immediately beside a forward slash must be uppercase. (eg S/O)";
+            + "Letters immediately closest to a forward slash must be uppercase. (eg S/O)";
 
     /*
      * (1) Only alphabetical characters, single spaces, and forward slashes.
