@@ -193,12 +193,13 @@ Format: `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
 * Adds or deletes tags of the person at the specified `INDEX` of the displayed person list.
 * **At least one of the `a/` or `d/` fields must be provided.**
 * If multiple tags are to be added or deleted, their names are to be separated by spaces.
-* There are 5 colour options: `red`, `yellow`, `green`, `blue` (default), and `purple`.
+* There are 5 colour options: `RED`, `YELLOW`, `GREEN`, `BLUE` (default), and `PURPLE`.
+  * case-insensitive, so `c/red` and `c/RED` are both valid
 * When adding, specifying a colour applies the colour to all tags that are being added.
 * When deleting, the tags are deleted by name and not by colour.
 
 Examples:
-1. `tag 1 a/IT Intern c/red` adds two tags `IT` and `Intern` with a **RED** colour.
+1. `tag 1 a/IT Intern c/RED` adds two tags `IT` and `Intern` with a **RED** colour.
 2. `tag 1 d/Best_Employee` deletes a tag `Best_Employee`.
 3. `tag 1 a/HR Best_Employee d/IT` adds two tags `HR` and `Best_Employee`, while deleting `IT`.
 
