@@ -143,7 +143,8 @@ Expected result (starting with the existing sample data):
 > (2) Only digits<br>
 > Duplicate-handling: all digits match<br>
 
-> **PERSON duplicate handling**<br>
+> **PERSON**<br>
+> Duplicate-handling:<br>
 > (1) If two people have empty EMAIL and PHONE, they are duplicates if their NAME are the same<br>
 > (2) Otherwise, they are duplicates if their PHONE, EMAIL and NAME are all the same<br>
 </box>
