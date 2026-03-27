@@ -102,7 +102,7 @@ Expected result (starting with the existing sample data):
 
 **Tip on navigation**
 
-As the app automatically resets the scroll bar to the top after the command, you will need to scroll down to see the newly added entry.
+> As the app automatically resets the scroll bar to the top after the command, you will need to scroll down to see the newly added entry.
 </box>
 
 <box type="info" seamless>
