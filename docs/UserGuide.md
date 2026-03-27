@@ -195,8 +195,8 @@ Format: `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
 * If multiple tags are to be added or deleted, their names are to be separated by spaces.
 * There are 5 colour options: `RED`, `YELLOW`, `GREEN`, `BLUE` (default), and `PURPLE`.
   * case-insensitive, so `c/red` and `c/RED` are both valid
-* When adding, specifying a colour applies the colour to all tags that are being added.
-* When deleting, the tags are deleted by name and not by colour.
+* When adding, specifying the optional `c/` field applies the colour to all tags that are being added.
+* When deleting, do not use the `c/` field.
 
 Examples:
 1. `tag 1 a/IT Intern c/RED` adds two tags `IT` and `Intern` with a **RED** colour.
