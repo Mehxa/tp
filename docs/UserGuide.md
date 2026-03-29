@@ -141,6 +141,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SALARY`
 > [**SALARY**]<br>
 > (1) Can be empty<br>
 > (2) Only digits<br>
+> (3) No spaces between digits<br>
 > Duplicate-handling: exact match<br>
 
 > [**PERSON duplicate handling**]<br>
@@ -161,6 +162,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 * Edits the person at the specified `INDEX` of the displayed person list.
 * **At least one of the optional fields must be provided.**
 * Existing values will be updated to the input values.
+* Input values can be the same as existing values (e.g. if person with `INDEX` 2 already has `SALARY` of `3000`, user can still perform `edit 2 s/3000`)
 
 Examples:
 *  `edit 1 p/+017 91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `+017 91234567` and `johndoe@example.com` respectively.
@@ -270,6 +272,7 @@ Format: `cert-edit INDEX [n/CERT_NAME] [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DA
 * The index refers to the index number shown in the displayed person list.
 * The Certificate to be edited is specified by its name using the `n/` parameter.
 * It is optional to include `ne/` and `ee/` flags, depending on whether the name or the expiry date has to be edited.
+* It is possible to edit a certificate with details of an already existing certificate.
 
 Examples:
 * `cert-edit 1 n/OSCP ne/OSCP2` will edit the certificate originally named 'OSCP' held by the first person in the list, updating its name to 'OSCP2'.
