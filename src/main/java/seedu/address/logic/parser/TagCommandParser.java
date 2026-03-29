@@ -66,13 +66,13 @@ public class TagCommandParser implements Parser<TagCommand> {
                 tagsToUpdate = parseTagsForEdit(Set.of(tagsAsStringToAdd.get().split("\\s+")));
             }
             logger.finest("Adding tags: " + tagsToUpdate.toString());
-            return new TagCommand(index, tagsToUpdate, Set.of());
+            return new TagCommand(index, tagsToUpdate, true);
         }
 
         if (tagsAsStringToDelete.isPresent()) {
             tagsToUpdate = parseTagsForEdit(Set.of(tagsAsStringToDelete.get().split("\\s+")));
             logger.finest("Tags to delete: " + tagsToUpdate.toString());
-            return new TagCommand(index, Set.of(), tagsToUpdate);
+            return new TagCommand(index, tagsToUpdate, false);
         }
         logger.finer("ERROR: TagCommandParser has no add or delete any tags fields.");
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));

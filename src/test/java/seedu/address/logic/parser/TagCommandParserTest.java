@@ -80,21 +80,21 @@ public class TagCommandParserTest {
     public void parse_someFieldsPresent_success() {
         assertParseSuccess(parser, "1 d/TEST1 TEST2",
                 new TagCommand(INDEX_FIRST_PERSON,
-                        Set.of(),
-                        Set.of(new Tag("TEST1"), new Tag("TEST2"))
+                        Set.of(new Tag("TEST1"), new Tag("TEST2")),
+                        false
                 ));
 
 
         assertParseSuccess(parser, "1 a/TEST1 TEST2",
                 new TagCommand(INDEX_FIRST_PERSON,
                         Set.of(new Tag("TEST1"), new Tag("TEST2")),
-                        Set.of()
+                        true
                 ));
 
         assertParseSuccess(parser, "1 a/TEST1 TEST2 c/purple",
                 new TagCommand(INDEX_FIRST_PERSON,
                         Set.of(new Tag("TEST1", TagColour.PURPLE), new Tag("TEST2", TagColour.PURPLE)),
-                        Set.of()
+                        true
                 ));
     }
 
