@@ -222,7 +222,7 @@ Format: `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE
 * Edits a certificate of the person at the specified `INDEX` of the displayed person list.
 * The Certificate to be edited is specified by its name using the `n/` parameter.
 * Either the `ne/` and/or the `ee/` flags must be included, depending on whether the name or the expiry date has to be edited.
-* It is possible to edit a certificate with details of an already existing certificate.
+* Overwriting a Certificate with the same CERT_NAME and CERT_EXPIRY_DATE is allowed.
 
 Example: `cert-edit 1 n/OSCP ne/OSCP2`
 * Edits the certificate originally named 'OSCP' held by the first person in the list, updating its name to 'OSCP2'.
