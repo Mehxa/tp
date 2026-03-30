@@ -60,11 +60,6 @@ public class AddCommand extends Command {
 
         assert toAdd != null : "Person to add cannot be null at execution";
 
-        /*if (model.hasPerson(toAdd)) {
-            logger.info("AddCommand failed: Duplicate person detected - " + toAdd.getName());
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }*/
-
         model.commitAddressBook();
         model.addPerson(toAdd);
         String feedback = String.format(MESSAGE_SUCCESS, Messages.format(toAdd));

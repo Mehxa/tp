@@ -32,8 +32,9 @@ public class CommandResult {
         this.isWarning = isWarning;
     }
 
-    /** Constructs a {@code CommandResult} with specified {@code feedbackToUser},
-     *  {@code isWarning}, and other fields set to their default value.
+    /**
+     * Constructs a {@code CommandResult} with specified {@code feedbackToUser},
+     *  and specified {@code isWarning}, and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, boolean isWarning) {
         this(feedbackToUser, false, false, isWarning);
