@@ -124,10 +124,11 @@ public class ParserUtil {
     public static Salary parseSalary(String salary) throws ParseException {
         requireNonNull(salary);
         String trimmedSalary = salary.replaceAll("\\s+", "");
-        if (!Salary.isValidSalary(trimmedSalary)) {
+        String noLeadingZeroes = trimmedSalary.replaceFirst("^0+(?!$)", "");
+        if (!Salary.isValidSalary(noLeadingZeroes)) {
             throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
-        return new Salary(trimmedSalary);
+        return new Salary(noLeadingZeroes);
     }
 
     /**

@@ -332,6 +332,7 @@ public class ParserUtilTest {
         String messySalary = "  5 000  ";
         String expectedSalary = "5000";
         assertEquals(new Salary(expectedSalary), ParserUtil.parseSalary(messySalary));
+    }
 
     @Test
     public void parseSalary_leadingZeros_returnsNormalizedSalary() throws Exception {
