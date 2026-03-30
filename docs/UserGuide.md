@@ -111,7 +111,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 <box type="info" seamless>
 
 **Validation & Duplicate-handling Rules**
-> [**NAME**]<br>
+> **NAME**<br>
 > (1) **Cannot be empty**<br>
 > (2) Only letter, spaces, forward slash<br>
 > (3) Letters immediately beside forward slash must be uppercase<br>
@@ -152,7 +152,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 > > **Utility**: leading and trailing whitespaces will be trimmed. Internal whitespaces will be trimmed<br><br>
 > **Duplicate-handling**: values are equal<br>
 
-> [**PERSON duplicate handling**]<br>
+> **PERSON duplicate handling**<br>
 > (1) EMAIL and PHONE_NUMBER are empty: duplicates if NAMEs are the same<br>
 > (2) Else, 2 persons are duplicates if their NAME & PHONE_NUMBER & EMAIL are the same<br>
 </box>
@@ -194,7 +194,7 @@ Finds persons based on the given criteria.
 
 Format: `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 
-* At least one of the optional fields must be provided to search with
+* **At least one of the optional fields must be provided to search with**
 * The search is case-insensitive
 * Partial words will be matched
 * Multiple values of the same field can be used to expand the search (i.e. `OR` search),
@@ -216,7 +216,7 @@ Format: `list`
 ### Adding and deleting tags of a contact: `tag`
 Format: `tag INDEX [a/TAGS TO ADD SEPARATED BY SPACE] [c/COLOUR OF TAGS TO BE ADDED] [d/TAGS TO DELETE SEPARATED BY SPACE]`
 
-* Add or delete tags of the person at the specified `INDEX` of the the displayed person list.
+* Add or delete tags of the person at the specified `INDEX` of the displayed person list.
 * If multiple tags are to be added or deleted, they are to be separated by spaces.
 * There are 5 colour options for Tags: `RED`, `YELLOW`, `GREEN`, `BLUE`, `PURPLE`, the default colour is `BLUE`
 * **At least one of the `a/` or `d/` fields must be provided.** There is no need to have `c/` when only deleting tags
@@ -230,9 +230,11 @@ Examples:
 
 **Validation & Duplicate-handling Rules**
 
-(1) Only alphanumeric characters and `!@#$?/|<>_*&:;=`<br>
-(2) At most 30 characters long<br>
-Duplicate-handling: exact match
+> **TAG**<br>
+> (1) Only alphanumeric characters and `!@#$?/|<>_*&:;=`<br>
+> (2) At most 30 characters long<br>
+> > **Utility**: leading and trailing spaces are trimmed.<br><br>
+> > **Duplicate-handling**: case-sensitive comparison
 </box>
 
 <br>
@@ -241,7 +243,7 @@ Duplicate-handling: exact match
 
 Adds a Certificate to a person in the address book.
 
-Format `cert-add INDEX [n/CERT_NAME] [e/CERT_EXPIRY_DATE]`
+Format `cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
 * Adds a Certificate to a person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, ...
@@ -251,9 +253,20 @@ Format `cert-add INDEX [n/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 Examples:
 * `cert-add 1 n/OSCP e/2028-03-05` adds a Certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
 
-> Note that:
-> - Certificate names are limited to alphanumeric characters only.
-> - Multiple instances of Certificates with the same name will be considered duplicates, even if the expiry dates are different.
+> **CERT_NAME**<br>
+> (1) Only alphanumeric characters<br>
+> (2) Cannot be empty<br>
+>  > **Utility**: leading and trailing spaces are trimmed. Internal whitespaces are trimmed to 1.<br><br>
+>  > **Duplicate-handling**: case-sensitive comparison.
+
+> **CERT_EXPIRY_DATE**<br>
+> (1) Must follow format YYYY-MM-DD<br>
+> (2) Cannot be empty<br>
+>  > **Utility**: leading and trailing spaces are trimmed.<br><br>
+>  > **Duplicate-handling**: exact match.
+
+> **CERTIFICATE duplicate handling**<br>
+> Multiple instances of Certificates with the same name will be considered duplicates, even if the expiry dates are different.
 
 <br>
 
@@ -261,7 +274,7 @@ Examples:
 
 Deletes a Certificate from a person in the address book.
 
-Format `cert-del INDEX [n/CERT_NAME]`
+Format `cert-del INDEX n/CERT_NAME`
 * Deletes a Certificate from a person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, ...
