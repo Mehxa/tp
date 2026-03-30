@@ -96,6 +96,8 @@ Format: `help`
 > Example: to get more help for `add`, enter `add` into the command box.
 </box>
 
+<br>
+
 ### Adding a new contact : `add`
 Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 * all four of the optional fields may be omitted
@@ -181,6 +183,8 @@ Example: `edit 1 p/+017 91234567 e/johndoe@example.com`
 
 * Edits the phone to `+017 91234567` and the email to `johndoe@example.com` for the first person.
 
+<br>
+
 ### Deleting an existing contact : `delete`
 Format: `delete INDEX`
 
@@ -189,7 +193,9 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if present.
+
 <br>
+
 ### Searching contacts by criteria : `find`
 Format: `find [n/NAME] [t/TAG] [c/CERT_NAME] [e/CERT_EXPIRY_DATE]`
 
@@ -209,8 +215,12 @@ Examples:
 2. `find c/OSCP` returns all persons with certificate names containing `OSCP`.
 3. `find n/Alex t/IT e/2027-03-15` returns all persons whose name contains `Alex`, with tags that contain `IT` and with certificates that expire before 15th March 2027.
 
+<br>
+
 ### Listing all contacts : `list`
 Format: `list`
+
+<br>
 
 ### Adding and deleting tags : `tag`
 Format: `tag INDEX [a/TAGS_TO_ADD] [c/COLOUR_OF_TAGS_TO_ADD] [d/TAGS_TO_DELETE]`
@@ -236,6 +246,7 @@ Examples:
 > > **Utility**: leading and trailing whitespaces will be trimmed.<br><br>
 > > **Duplicate-handling**: case-sensitive match
 
+<br>
 
 ### Adding certificates : `cert-add`
 Format `cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
@@ -267,6 +278,7 @@ Example: `cert-add 1 n/OSCP e/2028-03-05`
 > **CERTIFICATE duplicate handling**<br>
 > Multiple instances of CERTIFICATE with the same CERT_NAME will be considered duplicates, even if their CERT_EXPIRY_DATE are different.
 
+<br>
 
 ### Deleting certificates : `cert-del`
 Format `cert-del INDEX [n/CERT_NAME]`
@@ -276,7 +288,9 @@ Format `cert-del INDEX [n/CERT_NAME]`
 
 Example: `cert-del 1 n/OSCP`
 * Deletes the certificate named OSCP from the first person in the list.
+
 <br>
+
 ### Editing certificates : `cert-edit`
 Format: `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE]`
 
@@ -288,6 +302,7 @@ Format: `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE
 
 Example: `cert-edit 1 n/OSCP ne/OSCP2`
 * Edits the certificate originally named 'OSCP' held by the first person in the list, updating its name to 'OSCP2'.
+
 <br>
 
 ### Restoring the contact list : `undo`
@@ -301,7 +316,7 @@ Format: `undo`
 > * Limited to undoing **exactly one command** to restore the contact list to the immediate previous state.
 > * Will do nothing if there is no change in previous state (e.g. just restarted the app; consecutive attempts to undo; after calling the `list`, `find` or `sort` commands).
 
-</box>
+<br>
 
 ### Clearing all entries : `clear`
 Format: `clear`
@@ -327,6 +342,8 @@ Format: `help`
 > Tip: If you cannot access the user guide, you can use the `help` command to know what commands are available. Commands marked with `*` have detailed usage explanations, which you can view by running the command itself with no other inputs (e.g. just `cert-add`)
 
 </box>
+
+<br>
 
 ### Saving the data
 Big Brother data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.

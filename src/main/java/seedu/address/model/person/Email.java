@@ -20,7 +20,7 @@ public class Email {
             + "  2) contain only alphanumeric characters and hyphens\n"
             + "  3) start and end only with alphanumeric characters\n"
             + "  4) be at least 2 characters long for the last domain label\n"
-            + "Example: j.doe@hr-example.co\n"
+            + "Example: j.doe@hr-example.co\n\n"
             + "Utility: leading, trailing and internal whitespaces are trimmed to prevent typos.";
 
     // alphanumeric and special characters
