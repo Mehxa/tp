@@ -128,6 +128,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 * Edits the person at the specified `INDEX` of the displayed person list.
 * **At least one of the optional fields must be provided.**
 * Existing values will be updated to the input values.
+* Warning: inputting an empty value for a prefix would result in that value being deleted.
 * Input values can be the same as existing values (e.g. if person with `INDEX` 2 already has `SALARY` of `3000`, user can still perform `edit 2 s/3000`)
 
 Example: `edit 1 p/+017 91234567 e/johndoe@example.com`
