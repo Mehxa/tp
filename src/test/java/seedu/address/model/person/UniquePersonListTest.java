@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -53,9 +52,13 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicatePerson_success() {
         uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+        uniquePersonList.add(ALICE);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(ALICE);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
@@ -103,10 +106,14 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setPerson_editedPersonHasNonUniqueIdentity_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        uniquePersonList.setPerson(ALICE, BOB);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(BOB);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
@@ -157,9 +164,13 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setPersons_listWithDuplicatePersons_success() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+        uniquePersonList.setPersons(listWithDuplicatePersons);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(ALICE);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
