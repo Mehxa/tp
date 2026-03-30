@@ -164,6 +164,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 * Existing values will be updated to the input values.
 * Input values can be the same as existing values (e.g. if person with `INDEX` 2 already has `SALARY` of `3000`, user can still perform `edit 2 s/3000`)
 
+> **Duplicate Warning**: If you `edit` a contact such that it now matches another existing contact in your list, Big Brother will perform the edit but will trigger a **Warning pop-up** to alert you of the duplicate. You can choose to keep the duplicate or delete it later.
+</box>
+
 Example: `edit 1 p/+017 91234567 e/johndoe@example.com`
 
 * Edits the phone to `+017 91234567` and the email to `johndoe@example.com` for the first person.
