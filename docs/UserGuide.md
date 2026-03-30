@@ -55,6 +55,8 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
 * Arguments in square brackets are optional. More explanations will be provided where they appear.<br>
   e.g. `[a/TAGS_TO_ADD]`, `[d/TAGS_TO_DELETE]`
 
+* `INDEX` **must be a positive integer** 1, 2, 3, ...
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -73,7 +75,7 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
 
 * Mouseless-support is planned to be implemented in a future update.
 
-### Viewing in-app help : `help`
+### Viewing in-app help menu : `help`
 Format: `help`
 
 ![help message](images/helpMessage.png)
@@ -116,18 +118,19 @@ Expected result (starting with the existing sample data):
 
 > **PHONE**<br>
 > (1) Can be empty<br>
-> (2) `+` followed by COUNTRY_CODE followed by space followed by 3 to 15 digits phone number<br>
-> Duplicate-handling: all digits match<br>
+> (2) `+` then immediately followed by COUNTRY_CODE followed by space followed by 3 to 15 digits phone number<br>
+> Duplicate-handling: all digits match exactly<br>
 
 > **EMAIL**<br>
 > (1) Can be empty<br>
 > (2) Emails should be of the format 'local-part@domain', where 'local-part' should:<br>
 > * contain only alphanumeric characters and `+_.-`<br>
 > * not start or end with `+_.-`<br>
->
+> * not contain consecutive `+_.-`<br>
 > (3) and 'domain' is made of domain labels where each should:<br>
 > * be separated by `.`
 > * contain only alphanumeric characters and hyphens
+> * not contain consecutive hyphens
 > * start and end only with alphanumeric characters
 > * be at least 2 characters long for the last domain label<br>
 > Duplicate-handling: case-sensitive match<br>
@@ -141,6 +144,7 @@ Expected result (starting with the existing sample data):
 > **SALARY**<br>
 > (1) Can be empty<br>
 > (2) Only digits<br>
+> (3) No spaces between digits<br>
 > Duplicate-handling: all digits match<br>
 
 > **PERSON**<br>
@@ -155,6 +159,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SALARY]`
 * Edits the person at the specified `INDEX` of the displayed person list.
 * **At least one of the optional fields must be provided.**
 * Existing values will be updated to the input values.
+* Input values can be the same as existing values (e.g. if person with `INDEX` 2 already has `SALARY` of `3000`, user can still perform `edit 2 s/3000`)
 
 Example: `edit 1 p/+017 91234567 e/johndoe@example.com`
 
@@ -166,6 +171,14 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX` of the displayed person list.
 
 Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if present.
+
+<br>
+
+### Searching contacts by criteria: `find`
+
+Finds persons based on the given criteria.
 1. `list` followed by `delete 2` deletes the second person in the results of the `list` command.
 2. `find n/John` followed by `delete 1` deletes the first person in the results of the `find` command.
 
@@ -217,11 +230,21 @@ Examples:
 Format `cert-add INDEX n/CERT_NAME e/CERT_EXPIRY_DATE`
 * Adds a certificate to the person at the specified `INDEX` of the displayed person list.
 
+Adds a Certificate to a person in the address book.
+
+Format `cert-add INDEX [n/CERT_NAME] [e/CERT_EXPIRY_DATE]`
+* Adds a Certificate to a person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* A Certificate must have both a name and an expiry date.
+* Expiry dates must be formatted as **YYYY-MM-DD**.
+
 Example: `cert-add 1 n/OSCP e/2028-03-05`
 * Adds a certificate named OSCP with an expiry date on 5th March 2028 to the first person in the list.
 
 <box type="info" seamless>
-
+> Note that:
+> - Certificate names are case-sensitive and limited to alphanumeric characters only.
+> - Multiple instances of Certificates with the same name will be considered duplicates, even if the expiry dates are different.
 **Validation & Duplicate-handling Rules**
 
 > (1) CERT_NAME : Only alphanumeric characters and spaces<br>
@@ -236,31 +259,55 @@ Format `cert-del INDEX n/CERT_NAME`
 Example: `cert-del 1 n/OSCP`
 * Deletes the certificate named OSCP from the first person in the list.
 
+Format `cert-del INDEX [n/CERT_NAME]`
+* Deletes a Certificate from a person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The Certificate to be deleted is specified by only its name.
 ### Editing certificates : `cert-edit`
 Format: `cert-edit INDEX n/CERT_NAME [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE]`
 
 * Edits a certificate of the person at the specified `INDEX` of the displayed person list.
-* **At least one of the optional fields should be provided.**
+* The index refers to the index number shown in the displayed person list.
+* The Certificate to be edited is specified by its name using the `n/` parameter.
+* Either the `ne/` and/or the `ee/` flags must be included, depending on whether the name or the expiry date has to be edited.
+* It is possible to edit a certificate with details of an already existing certificate.
 
 Example: `cert-edit 1 n/OSCP ne/OSCP2`
 * Edits the certificate originally named 'OSCP' held by the first person in the list, updating its name to 'OSCP2'.
 
-### Deleting all entries : `clear`
-Format: `clear`
+Format: `cert-edit INDEX [n/CERT_NAME] [ne/NEW_CERT_NAME] [ee/NEW_CERT_EXPIRY_DATE]`
+* Edits a Certificate that a person at the specified `INDEX` holds.
+
 
 ### Restoring the contact list : `undo`
 Format: `undo`
 
 <box type="warning" seamless>
-
 **CAUTION:**
-
 * Limited to undoing **exactly one command** to restore the contact list to the immediate previous state.
 * Will do nothing if there is no change in previous state (e.g. just restarted the app; consecutive attempts to undo; after calling the `list`, `find` or `sort` commands).
 </box>
 
+### Clearing all entries : `clear`
+Format: `clear`
+
+<box type="info" seamless>
+> Tip: if you accidentally ran `clear`, you can run `undo` to restore your immediate previous contact list.
+</box>
+
+<br>
+
 ### Exiting the program : `exit`
 Format: `exit`
+
+<br>
+
+### Accessing the offline help menu : `help`
+Format: `help`
+
+> Tip: If you cannot access the user guide, you can use the `help` command to know what commands are available. Commands marked with `*` have detailed usage explanations, which you can view by running the command itself with no other inputs (e.g. just `cert-add`)
+
+<br>
 
 ### Saving the data
 Big Brother data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
