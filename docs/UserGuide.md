@@ -286,11 +286,15 @@ Format: `help`
 | CERT_NAME                | 1. Only alphanumeric characters and whitespaces<br/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | case-*sensitive* match                                                                                                                          | 1. Leading and trailing whitespaces will be trimmed.<br/> 2. Internal whitespaces will be trimmed to 1.                                                                                                                                                    |
 | CERT_EXPIRY_DATE         | 1. Must follow format `YYYY-MM-DD`<br/>2. Must be a valid date.<br/>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | same `YYYY-MM-DD`                                                                                                                               | Leading and trailing whitespaces will be trimmed.                                                                                                                                                                                                          |
 
-> **CAUTION**: When are 2 **persons** considered duplicates?<br>
+> **CAUTION**: When are 2 **persons** considered duplicates?<br><br>
 > Possible right after executing [add](#adding-a-new-contact--add) or [edit](#editing-an-existing-contact--edit) commands<br>
 > (1) `EMAIL` and `PHONE` are empty: duplicates if `NAME` are the same<br>
 > (2) Else, 2 persons are duplicates if their `NAME` & `PHONE` & `EMAIL` are the same<br><br>
 > **Good news**: there will be a warning pop-up message if duplicate persons are detected after executing a command. It is then up to you to delete duplicates.
+
+> **CAUTION**: When are 2 **certificates** considered duplicates?<br>
+> * Possible right after executing [cert-add](#adding-certificates--cert-add) or [cert-edit](#editing-certificates--cert-edit) commands<br>
+> * Certificates are duplicates if `CERT_NAME` are duplicates. `CERT_EXPIRY_DATE` is not taken into account. 
 
 <br>
 
