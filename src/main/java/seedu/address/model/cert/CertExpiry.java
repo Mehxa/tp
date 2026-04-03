@@ -18,11 +18,17 @@ public class CertExpiry {
 
     /**
      * Constructs a valid CertExpiry.
-     * @param expiry Expiry date
+     * @param expiry Expiry date, can be null for no expiry.
      */
     public CertExpiry(LocalDate expiry) {
-        requireNonNull(expiry);
         expiryDate = expiry;
+    }
+
+    /**
+     * Returns true if there is an expiry date.
+     */
+    public boolean hasExpiry() {
+        return expiryDate != null;
     }
 
     /**
@@ -59,7 +65,7 @@ public class CertExpiry {
 
     @Override
     public String toString() {
-        return this.expiryDate.toString();
+        return hasExpiry() ? this.expiryDate.toString() : "No Expiry";
     }
 
     public String getDisplayDateString() {
