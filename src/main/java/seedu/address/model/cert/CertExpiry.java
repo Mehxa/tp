@@ -1,7 +1,5 @@
 package seedu.address.model.cert;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
@@ -43,7 +41,18 @@ public class CertExpiry {
         }
     }
 
+    /**
+     * Returns true if this expiry date is strictly before the {@code otherCertExpiry} date.
+     */
     public boolean isBefore(CertExpiry otherCertExpiry) {
+        //if this cert has no expiry, it is never before another date
+        if (this.expiryDate == null) {
+            return false;
+        }
+        //if other date is null, a specific date is logically before forever
+        if (otherCertExpiry.expiryDate == null) {
+            return true;
+        }
         return expiryDate.isBefore(otherCertExpiry.expiryDate);
     }
 

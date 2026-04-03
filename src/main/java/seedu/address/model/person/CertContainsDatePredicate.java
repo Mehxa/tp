@@ -21,9 +21,9 @@ public class CertContainsDatePredicate implements Predicate<Person> {
         return person.getCertificates().stream()
                 .anyMatch(personCert -> {
                     //if cert has no expiry, it's forever valid and should not show up in find e/
-                   if (!personCert.getExpiry().hasExpiry()) {
-                       return false;
-                   }
+                    if (!personCert.getExpiry().hasExpiry()) {
+                        return false;
+                    }
                     return personCert.isExpiredBefore(expiry);
                 });
     }
