@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Salary;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagColour;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -34,13 +35,19 @@ public class SampleDataUtil {
                 new CertName("Burp Suite Certified Practitioner"),
                 new CertExpiry(LocalDate.parse("2027-06-21"))));
 
+        ArrayList<Certificate> uiCert = new ArrayList<>();
+        uiCert.add(new Certificate(
+                new CertName("Google UX Certificate"),
+                new CertExpiry(LocalDate.parse("2027-02-21"))));
+
+
         return new Person[] {
             new Person(
                     new Name("John Kler"),
                     new Phone("+65 81234567"),
                     new Email("johnkler@example.co"),
                     new Address("123D Pine Road, #12-345, Singapore 123456"),
-                    getTagSet("Pentester", "AD"),
+                    Set.of(new Tag("CEO", TagColour.YELLOW)),
                     new Salary("6500"),
                     oscpCert),
             new Person(
@@ -48,7 +55,7 @@ public class SampleDataUtil {
                     new Phone("+65 87654321"),
                     new Email("johndoe@example.co"),
                     new Address("321D Einp Road, #54-321, Singapore 654321"),
-                    getTagSet("Pentester", "Web"),
+                    Set.of(new Tag("IT", TagColour.YELLOW), new Tag("Security", TagColour.GREEN)),
                     new Salary("6500"),
                     burpCert),
             new Person(
@@ -56,15 +63,53 @@ public class SampleDataUtil {
                     new Phone("+65 84321765"),
                     new Email("janedo@example.co"),
                     new Address("987A Nepi Road, #21-543, Singapore 321654"),
-                    getTagSet("Intern"),
+                    Set.of(new Tag("Development", TagColour.YELLOW), new Tag("UI-UX", TagColour.GREEN),
+                            new Tag("Intern", TagColour.PURPLE)),
                     new Salary("1300")),
             new Person(
                     new Name("Johny Doeh"),
                     new Phone("+65 81357246"),
                     new Email("johnydoeh@example.co"),
                     new Address("654B Enpi Road, #45-123, Singapore 246135"),
-                    getTagSet("Intern"),
-                    new Salary("1300"))
+                    Set.of(new Tag("Admin", TagColour.YELLOW), new Tag("HR", TagColour.GREEN),
+                            new Tag("Intern", TagColour.PURPLE)),
+                    new Salary("1300")),
+            new Person(
+                    new Name("Bernice Yu"),
+                    new Phone("+65 99272758"),
+                    new Email("berniceyu@example.co"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    Set.of(new Tag("Development", TagColour.YELLOW), new Tag("UI-UX", TagColour.GREEN)),
+                    new Salary("1300"),
+                    uiCert),
+            new Person(
+                    new Name("Charlotte Oliveiro"),
+                    new Phone("+65 93210283"),
+                    new Email("charlotte@example.co"),
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    Set.of(new Tag("IT", TagColour.YELLOW), new Tag("Security", TagColour.GREEN)),
+                    new Salary("6700")),
+            new Person(
+                    new Name("David Li"),
+                    new Phone("+65 91031282"),
+                    new Email("lidavid@example.co"),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                    Set.of(new Tag("Admin", TagColour.YELLOW), new Tag("HR", TagColour.GREEN)),
+                    new Salary("5500")),
+            new Person(
+                    new Name("Irfan Ibbrahim"),
+                    new Phone("+65 92492021"),
+                    new Email("irfan@example.co"),
+                    new Address("Blk 47 Tampines Street 20, #17-35"),
+                    Set.of(new Tag("Admin", TagColour.YELLOW), new Tag("HR", TagColour.GREEN)),
+                    new Salary("5500")),
+            new Person(
+                    new Name("Roy Balakrishnan"),
+                    new Phone("+65 92624417"),
+                    new Email("royb@example.co"),
+                    new Address("Blk 45 Aljunied Street 85, #11-31"),
+                    Set.of(new Tag("Development", TagColour.YELLOW), new Tag("FrontEnd", TagColour.GREEN)),
+                    new Salary("6700"))
         };
     }
 
