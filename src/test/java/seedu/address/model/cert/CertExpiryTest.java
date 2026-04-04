@@ -1,5 +1,6 @@
 package seedu.address.model.cert;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,6 +29,33 @@ public class CertExpiryTest {
 
         // forever is not before forever
         assertFalse(forever.isBefore(new CertExpiry(null)));
+    }
+
+    @Test
+    public void getDisplayDateString_nullDate_returnsNoExpiry() {
+        CertExpiry noExpiry = new CertExpiry(null);
+        assertEquals("No Expiry", noExpiry.getDisplayDateString());
+    }
+
+    @Test
+    public void toString_nullDate_returnsNoExpiry() {
+        CertExpiry noExpiry = new CertExpiry(null);
+        assertEquals("No Expiry", noExpiry.toString());
+    }
+
+    @Test
+    public void isBefore_variousCases() {
+        CertExpiry date1 = new CertExpiry(LocalDate.parse("2026-01-01"));
+        CertExpiry date2 = new CertExpiry(LocalDate.parse("2027-01-01"));
+        CertExpiry noExpiry = new CertExpiry(null);
+
+        // no expiry date will never come before another date
+        assertFalse(noExpiry.isBefore(date1));
+
+        // a specified date will come before no expiry date
+        assertTrue(date1.isBefore(noExpiry));
+
+        assertTrue(date1.isBefore(date2));
     }
 
     @Test
