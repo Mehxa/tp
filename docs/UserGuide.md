@@ -78,7 +78,7 @@ Big Brother is a desktop app for Human Resources to manage employee contacts, op
 
 * You can hover your mouse cursor over the desired scroll bar, then scroll each section independently.
 
-* When you perform a command that modifies the contact list or a contact entry, all the contact entries will scroll to the top.
+* When you perform a command that modifies the contact list or a contact entry, every individual contact entry will scroll to the top.
 
 * The main contact list **does not have autoscroll**, so you may need to scroll manually to see the changes after performing a command (e.g. after `add`, the newly added contact is at the bottom).
 
