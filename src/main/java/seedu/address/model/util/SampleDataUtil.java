@@ -69,9 +69,10 @@ public class SampleDataUtil {
                     new Phone("+65 99272758"),
                     new Email("berniceyu@example.co"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    getTagSet(Set.of(new Pair<>("Development", "yellow"), new Pair<>("UI-UX", "green"))),
-                    new Salary("5300"),
-                    getCertificateArrayList(List.of(new Pair<>("Google UX Design Certificate", "2026-04-13")))),
+                    getTagSet(Set.of(new Pair<>("Development", "yellow"), new Pair<>("UI-UX", "green"),
+                            new Pair<>("Intern", "blue"), new Pair<>("Exiting", "purple"))),
+                    new Salary("1300"),
+                    getCertificateArrayList(List.of(new Pair<>("Google UX Design Certificate", "2022-04-13")))),
             new Person(
                     new Name("Charlotte Oliveiro"),
                     new Phone("+65 93210283"),
@@ -140,6 +141,8 @@ public class SampleDataUtil {
             return TagColour.YELLOW;
         case "green":
             return TagColour.GREEN;
+        case "purple":
+            return TagColour.PURPLE;
         default:
             return TagColour.BLUE;
         }
