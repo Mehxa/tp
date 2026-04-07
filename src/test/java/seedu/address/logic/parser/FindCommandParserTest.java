@@ -18,6 +18,7 @@ import seedu.address.model.cert.Certificate;
 import seedu.address.model.person.CertContainsDatePredicate;
 import seedu.address.model.person.CertContainsKeywordsPredicate;
 import seedu.address.model.person.CombinedPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
@@ -41,6 +42,12 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " n/  Alice  \n n/  Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidNameFormat_throwsParseException() {
+        // Name with invalid / usage
+        assertParseFailure(parser, " n/ A/lice", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -83,9 +90,17 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parseinvalidCertFormat_throwsParseException() {
+    public void parse_invalidCertNameFormat_throwsParseException() {
         // Certificate with invalid characters
         assertParseFailure(parser, " c/ Social Media@IBM ", CertName.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidCertExpiryDateFormat_throwsParseException() {
+        // Invalid date format
+        assertParseFailure(parser, " e/ 2028/12/15", CertExpiry.MESSAGE_CONSTRAINTS);
+        // NaN date value
+        assertParseFailure(parser, " e/ tomorrow", CertExpiry.MESSAGE_CONSTRAINTS);
     }
 
     @Test
