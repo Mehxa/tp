@@ -34,7 +34,7 @@ public class TagCommandParser implements Parser<TagCommand> {
      */
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        logger.finer("Parsing Tag Commands");
+        logger.finer("Parsing Tag Command");
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_TAG, PREFIX_DELETE_TAG, PREFIX_COLOUR_TAG);
@@ -58,19 +58,21 @@ public class TagCommandParser implements Parser<TagCommand> {
         Optional<String> coloursAsStringToAdd = argMultimap.getValue(PREFIX_COLOUR_TAG);
 
         if (tagsAsStringToAdd.isPresent()) {
+            logger.finest("Preparing to add tags: ");
             if (coloursAsStringToAdd.isPresent()) {
                 tagsToUpdate = parseTagsForEdit(List.of(tagsAsStringToAdd.get().split("\\s+")),
                         Arrays.stream(coloursAsStringToAdd.get().split("\\s+")).toList());
             } else {
                 tagsToUpdate = parseTagsForEdit(List.of(tagsAsStringToAdd.get().split("\\s+")));
             }
-            logger.finest("Adding tags: " + tagsToUpdate.toString());
+            logger.finer("Adding tags: " + tagsToUpdate.toString());
             return new TagCommand(index, tagsToUpdate, true);
         }
 
         if (tagsAsStringToDelete.isPresent()) {
+            logger.finest("Preparing to delete tags: ");
             tagsToUpdate = parseTagsForEdit(List.of(tagsAsStringToDelete.get().split("\\s+")));
-            logger.finest("Tags to delete: " + tagsToUpdate.toString());
+            logger.finer("Tags to delete: " + tagsToUpdate.toString());
             return new TagCommand(index, tagsToUpdate, false);
         }
         logger.finer("ERROR: TagCommandParser has no add or delete any tags fields.");

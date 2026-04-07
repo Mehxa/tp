@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,6 +36,8 @@ public class ParserUtil {
     public static final String MESSAGE_TAGNAME_NUMBER_AND_COLOUR_NUMBERS_DIFF = "The number of tags to add must match"
             + " the number of colours specified (Unless all tags are to be the same colour, in that case,"
             + " specify only ONE colour)";
+
+    private static final Logger logger = LogsCenter.getLogger(TagCommandParser.class);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
@@ -152,10 +156,14 @@ public class ParserUtil {
         requireNonNull(tagColour);
 
         String trimmedTag = normaliseWhiteSpace(tag);
+
+        logger.finest("Attempting to create Tag: " + trimmedTag + " " + tagColour.name());
         if (!Tag.isValidTagName(trimmedTag)) {
+            logger.finer("Invalid TagName " + trimmedTag);
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         if (!Tag.isValidTagLength(trimmedTag)) {
+            logger.finer("Invalid Tag Length " + trimmedTag);
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS_LENGTH);
         }
         return new Tag(trimmedTag, tagColour);
@@ -174,35 +182,44 @@ public class ParserUtil {
     public static Set<Tag> parseTags(List<String> tags, List<String> userInputTagColours) throws ParseException {
         requireNonNull(tags);
         requireNonNull(userInputTagColours);
-
         assert(!tags.isEmpty());
         assert(!userInputTagColours.isEmpty());
 
-        boolean isUsingOneColour = (userInputTagColours.size() == 1);
-
         if (hasDuplicateTags(tags)) {
+            logger.finer("Duplicate Tags specified");
             throw new ParseException(MESSAGE_DUPLICATE_TAGNAME);
         }
 
+        boolean isUsingOneColour = (userInputTagColours.size() == 1);
+        logger.finest("Detect only one colour?: " + isUsingOneColour);
+
         Optional<TagColour> currentColour = TagColour.getTagColourByUserInputName(userInputTagColours.get(0));
         if (isUsingOneColour && currentColour.isPresent()) {
+            logger.finest("Detected only one valid colour. " + currentColour.get());
             return parseTags(tags, currentColour.get());
         }
 
         if (userInputTagColours.size() != tags.size()) {
+            logger.finer("Invalid number of colours. Number of colours specified: "
+                    + userInputTagColours.size() + "\nNumber of tags specified: " + tags.size());
             throw new ParseException(MESSAGE_TAGNAME_NUMBER_AND_COLOUR_NUMBERS_DIFF);
         }
 
+        String colourName;
         final Set<Tag> tagSet = new TagSet();
         for (int i = 0; i < tags.size(); i += 1) {
-            currentColour = TagColour.getTagColourByUserInputName(userInputTagColours.get(i));
+            colourName = userInputTagColours.get(i);
+            currentColour = TagColour.getTagColourByUserInputName(colourName);
 
             if (currentColour.isEmpty()) {
+                logger.finer("Invalid Colour Detected: " + colourName);
                 throw new ParseException(TagColour.MESSAGE_INVALID_COLOUR);
             }
 
             tagSet.add(parseTag(tags.get(i), currentColour.get()));
         }
+
+        logger.finer("Colours successfully parsed");
         return tagSet;
     }
 
