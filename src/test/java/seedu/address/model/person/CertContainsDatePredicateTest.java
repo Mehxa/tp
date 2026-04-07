@@ -81,6 +81,21 @@ public class CertContainsDatePredicateTest {
     }
 
     @Test
+    public void test_noExpiryCert_returnsFalse() {
+        // Searching for certificates expired before 2026-01-01
+        CertContainsDatePredicate predicate =
+                new CertContainsDatePredicate(new CertExpiry(LocalDate.parse("2026-01-01")));
+
+        // Person has a certificate with NO expiry date
+        Certificate permanentCert = new Certificate(new CertName("Safety 101"), new CertExpiry(null));
+        Person person = new PersonBuilder().withName("Alice")
+                .withCertificates(new ArrayList<Certificate>(List.of(permanentCert))).build();
+
+        // return false since a permanent cert never expires
+        assertFalse(predicate.test(person));
+    }
+
+    @Test
     public void equals() {
         CertExpiry firstDate = new CertExpiry(LocalDate.parse("2020-03-04"));
         CertExpiry secondDate = new CertExpiry(LocalDate.parse("2020-05-05"));
@@ -111,5 +126,4 @@ public class CertContainsDatePredicateTest {
         CertContainsDatePredicate predicate = new CertContainsDatePredicate(dateToCompare);
         String expected = CertContainsDatePredicate.class.getCanonicalName() + "{expiry date=" + dateToCompare + "}";
         assertEquals(expected, predicate.toString());
-    }
 }
