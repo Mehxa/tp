@@ -212,7 +212,7 @@ Parameters:
 <a href="#input-validation-duplicate-handling-and-utilities" class="badge bg-dark">TAGS_TO_DELETE</a>
 
 * Adds or deletes tags of the person at the specified `INDEX` of the displayed person list.
-* ** You must either specify the add `a/` prefix or the delete `d/` prefix. Both arguments cannot be specified at the same time.**
+* **You must either specify the add `a/` prefix or the delete `d/` prefix. Both arguments cannot be specified at the same time.**
 * If multiple tags are to be added or deleted, you should separate their names are by spaces. (e.g. `a/TAG1 TAG2`). Note that the `tag` command is the only command with this property.
 * There are 5 colour options for `COLOUR_OF_TAGS_TO_ADD`: `RED`, `YELLOW`, `GREEN`, `BLUE` (default), and `PURPLE`.
   * You can either specify one colour per tag in `a/` (separated by space, i.e `a/TAG1 TAG2 c/RED GREEN`), or specify one single colour to be applied to all tags (i.e `a/TAG1 TAG2 c/red`).
