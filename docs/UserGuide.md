@@ -255,6 +255,8 @@ Format: `undo`
 
 </box>
 
+<br>
+
 ### Sorting all contacts : `sort`
 Format: `sort`
 * Sorts the contact list in alphabetical order of name.
@@ -312,7 +314,7 @@ Format: `exit`
 
 **Additional infomation on duplicate certificates**
 > Possible right after executing [cert-add](#adding-certificates--cert-add) or [cert-edit](#editing-certificates--cert-edit) commands<br>
-> Certificates are duplicates if `CERT_NAME` are duplicates. `CERT_EXPIRY_DATE` is not taken into account. 
+> Certificates are duplicates if `CERT_NAME` are duplicates. `CERT_EXPIRY_DATE` is not taken into account.
 
 </box>
 
