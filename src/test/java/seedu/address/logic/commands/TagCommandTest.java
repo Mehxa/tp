@@ -41,7 +41,6 @@ public class TagCommandTest {
         Person originalPerson = model.getFilteredPersonList().get(0);
 
         Set<Tag> toAdd = Set.of(new Tag("Test"));
-        //Set<Tag> toDelete = Set.of(new Tag("friends"));
 
         Set<Tag> newTags = new TagSet(originalPerson.getTags());
         newTags.addAll(toAdd);
