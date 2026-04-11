@@ -228,13 +228,13 @@ Parameters:
 * **You must either specify the add `a/` prefix or the delete `d/` prefix. Both arguments cannot be specified at the same time.**
 * If multiple tags are to be added or deleted, you should separate their names are by spaces. (e.g. `a/TAG1 TAG2`). Note that the `tag` command is the only command with this property.
 * There are 5 colour options for `COLOUR_OF_TAGS_TO_ADD`: `RED`, `YELLOW`, `GREEN`, `BLUE` (default), and `PURPLE`.
-  * You can either specify one colour to match 1-for-1 per tag in `a/`, separated by space. (i.e `a/TAG1 TAG2 c/RED GREEN`. Note that the specified number of tags and colours **must** be the same. See Ex 4 for more details)
+  * You can specify one colour to match 1-for-1 per tag in `a/`, separated by space. (i.e `a/TAG1 TAG2 c/RED GREEN`. Note that the specified number of tags and colours **must** be the same. See Ex 4 for more details)
   * Alternatively, you may instead specify one single colour to be applied to all tags (i.e `a/TAG1 TAG2 c/red`).
   * Colours are case-insensitive, so `c/red` and `c/RED` are both valid.
   * When deleting, do not use the `c/` prefix.
 
 Examples:
-All the below commands affect the person at `INDEX` 1
+All the below commands affect the person at [`INDEX`](#input-validation-duplicate-handling-and-utilities) 1
 1. `tag 1 a/IT Intern c/RED` adds two tags `IT` and `Intern` with a **RED** colour.
 2. `tag 1 d/Best_Employee` deletes a tag `Best_Employee`.
 3. `tag 1 a/HR Best_Employee` adds two tags `HR` and `Best_Employee` with the default colouration.
