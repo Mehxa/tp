@@ -671,7 +671,7 @@ testers are expected to do more *exploratory* testing
    2. Expected: The salary for the first employee is updated to 55000.
 
    3. Test case: `edit 1 s/-100`
-   4. Expected: Error message indicates that salary must be a non-negative number.
+   4. Expected: Error message indicates that salary must only contain digits and no special characters.
 
 ### Undo Functionality
 
