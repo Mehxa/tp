@@ -330,7 +330,7 @@ Format: `sort`
 * Sorts the contact list in alphabetical order of name.
 * Uppercase is prioritised over lowercase (i.e. "Bob" would be positioned before "alice").
 * The full contact list will be sorted, however filtered entries remain filtered.
-  * e.g. if [`find`]((#searching-contacts-by-criteria-find)) was called before [`sort`](#sorting-all-contacts-sort), only the found contacts remain displayed.
+  * e.g. if [`find`](#searching-contacts-by-criteria-find) was called before [`sort`](#sorting-all-contacts-sort), only the found contacts remain displayed.
 
 <box type="tip" seamless>
 
