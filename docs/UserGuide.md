@@ -91,6 +91,8 @@ Big Brother allows you to manage employee contacts, on your desktop, with keyboa
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Navigating the GUI (Graphic User Interface)
 * The GUI display is structured such that the main contacts list is a big scrollable section, and the contact entries are smaller scrollable sections.
 
@@ -105,8 +107,6 @@ Big Brother allows you to manage employee contacts, on your desktop, with keyboa
 * Mouseless-support is planned to be implemented in a future update.
 
 * When adjusting the display size, the contact entries temporarily disappear. They will reappear once the size has stabilized.
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing in-app help menu : `help`
 Format: `help`
@@ -129,6 +129,8 @@ Format: `help`
 > If you need more help with a command marked by a `*`, enter it with no arguments into the command box.
 > Example: to get more help for [`add`](#adding-a-new-contact-add), simply enter [`add`](#adding-a-new-contact-add) into the command box.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a new contact : `add`
 Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [sal/SALARY]`
@@ -170,6 +172,8 @@ Parameters:
 > 2. When there are multiple same persons, `edit` will modify the person with the smallest index between the same persons, regardless of the [`INDEX`](#input-validation-duplicate-handling-and-utilities) specified.<br>
 > 3. Since the persons are the same after all, the intended outcome of the user is still achieved.<br>
 
+<div style="page-break-after: always;"></div>
+
 Example:
 1. `edit 1 p/+017 91234567 e/johndoe@example.com` edits person 1's [`PHONE`](#input-validation-duplicate-handling-and-utilities) number to `+017 91234567` and the [`EMAIL`](#input-validation-duplicate-handling-and-utilities) to `johndoe@example.com`
 2. `edit 1 p/ e/` clears person 1's [`PHONE`](#input-validation-duplicate-handling-and-utilities) and [`EMAIL`](#input-validation-duplicate-handling-and-utilities). These attributes will now appear blank
@@ -180,8 +184,6 @@ Example:
 
 > If you `edit` a contact such that it now matches another existing contact in your list, Big Brother will perform the edit but will trigger a **warning pop-up** to alert you of the duplicate. You can choose to keep the duplicate or delete it later.
 </box>
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting an existing contact : `delete`
 Format: `delete INDEX`
@@ -422,7 +424,8 @@ Big Brother's data is saved automatically as a JSON file `[JAR file location]/da
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-* You can click each command below, which will bring you to their usage details.<br><br>
+You can click each command below, which will bring you to their usage details.<br>
+
 | Format                                                                                                        |
 |---------------------------------------------------------------------------------------------------------------|
 | [`add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [sal/SALARY]`](#adding-a-new-contact-add)                        |
